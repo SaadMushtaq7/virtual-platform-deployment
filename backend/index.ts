@@ -6,7 +6,7 @@ const cors = require('cors')
 const path = require('path')
 
 //Route
-app.get('/', function (req, res) {
+app.get('/api', function (req, res) {
     res.send('hello world')
 })
 
