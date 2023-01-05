@@ -1,5 +1,5 @@
-import express from 'express'
-import mongoose from 'mongoose'
+const express = require('express')
+const mongoose = require('mongoose')
 const app = express()
 const port = 8000
 const cors = require('cors')
@@ -18,6 +18,7 @@ mongoose
         console.log('No Connection!', e)
     })
 
+//cors config
 const corsOptions = {
     origin: '*',
     credentials: true, //access-control-allow-credentials:true
@@ -25,10 +26,8 @@ const corsOptions = {
 }
 app.use(cors(corsOptions))
 
-app.use(express.json());
-
 //Route
-app.get('/', function (req, res) {
+app.get('/', (req, res) =>{
     res.send('hello world')
 })
 
