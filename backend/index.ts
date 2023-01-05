@@ -4,10 +4,6 @@ const app = express()
 const port = 8000
 const cors = require('cors')
 
-//Route
-app.get('/', function (req, res) {
-    res.send('hello world')
-})
 //MongoDB connection
 mongoose.set('strictQuery', true);
 
@@ -22,14 +18,24 @@ mongoose
         console.log('No Connection!', e)
     })
 
-const router = require('./routes/user')
-const postRouter = require('./routes/post')
 const corsOptions = {
     origin: '*',
     credentials: true, //access-control-allow-credentials:true
     optionSuccessStatus: 200
 }
 app.use(cors(corsOptions))
+
+app.use(express.json());
+
+//Route
+app.get('/', function (req, res) {
+    res.send('hello world')
+})
+
+
+const router = require('./routes/user')
+const postRouter = require('./routes/post')
+
 app.use('/user', router)
 app.use('/post', postRouter)
 
