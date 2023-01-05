@@ -1,33 +1,33 @@
 const express = require('express')
-//const mongoose = require('mongoose')
+const mongoose = require('mongoose')
 const app = express()
 const port = 8000
-//const cors = require('cors')
+const cors = require('cors')
 
 //MongoDB connection
-// mongoose.set('strictQuery', true);
+mongoose.set('strictQuery', true);
 
-// mongoose
-//     .connect('mongodb+srv://saad:1234@cluster0.rzqacqk.mongodb.net/test', {
-//         family: 4
-//     })
-//     .then(() => {
-//         console.log('Connection is established!')
-//     })
-//     .catch((e) => {
-//         console.log('No Connection!', e)
-//     })
+mongoose
+    .connect('mongodb+srv://saad:1234@cluster0.rzqacqk.mongodb.net/test', {
+        family: 4
+    })
+    .then(() => {
+        console.log('Connection is established!')
+    })
+    .catch((e) => {
+        console.log('No Connection!', e)
+    })
 
 //cors config
-// const corsOptions = {
-//     origin: '*',
-//     credentials: true, //access-control-allow-credentials:true
-//     optionSuccessStatus: 200
-// }
-// app.use(cors(corsOptions))
+const corsOptions = {
+    origin: '*',
+    credentials: true, //access-control-allow-credentials:true
+    optionSuccessStatus: 200
+}
+app.use(cors(corsOptions))
 
 //Route
-app.get('/', (req, res) =>{
+app.get('/saad', (req, res) =>{
     res.send('hello world')
 })
 
