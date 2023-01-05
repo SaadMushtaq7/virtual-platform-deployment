@@ -4,6 +4,11 @@ const app = express()
 const port = 8000
 const cors = require('cors')
 
+app.get('/', (req, res) =>{
+    console.log('sssssss')
+    res.send('hello world')
+})
+
 //MongoDB connection
 mongoose.set('strictQuery', true);
 
@@ -18,7 +23,10 @@ mongoose
         console.log('No Connection!', e)
     })
 
-//cors config
+//Route
+
+const router = require('./routes/user')
+const postRouter = require('./routes/post')
 const corsOptions = {
     origin: '*',
     credentials: true, //access-control-allow-credentials:true
@@ -26,20 +34,11 @@ const corsOptions = {
 }
 app.use(cors(corsOptions))
 
-//Route
-app.get('/saad', (req, res) =>{
-    res.send('hello world')
-})
-
-
-const router = require('./routes/user')
-const postRouter = require('./routes/post')
-
 app.use('/user', router)
 app.use('/post', postRouter)
 
 //Server
-app.listen(port, function () {
+app.listen(port,  ()=> {
     console.log('Server is Up at port ', port)
 })
 
