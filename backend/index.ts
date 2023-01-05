@@ -5,7 +5,7 @@ const port = 8000
 const cors = require('cors')
 
 //Route
-app.get('/', function (req, res) {
+app.get('/api', function (req, res) {
     res.send('hello world')
 })
 //MongoDB connection
