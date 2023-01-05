@@ -27,6 +27,7 @@ const SignIn: FC = () => {
 
     if (error) {
         toast.error(`Error! ${error ? error.message : 'Failed to Login'}`)
+        return
     }
 
     if (data) {

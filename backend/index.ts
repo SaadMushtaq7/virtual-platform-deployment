@@ -3,30 +3,16 @@ import mongoose from 'mongoose'
 const app = express()
 const port = 8000
 const cors = require('cors')
-const path = require('path')
 
 //Route
-app.get('/api', function (req, res) {
+app.get('/', function (req, res) {
     res.send('hello world')
 })
-
-app.use(express.static(path.join(__dirname,"./frontend/build")))
-
-app.get("*",(_,res)=>{
-    res.sendFile(path.join(__dirname,"./frontend/build/index.html"),
-    (err)=>{
-        if(err){
-            //@ts-ignore
-            res.status.send(err)
-        }
-    }
-    )
-})
-
 //MongoDB connection
-mongoose.set("strictQuery", false);
+mongoose.set('strictQuery', true);
+
 mongoose
-    .connect('mongodb://localhost:27017/users', {
+    .connect('mongodb+srv://saad:1234@cluster0.rzqacqk.mongodb.net/test', {
         family: 4
     })
     .then(() => {
@@ -51,3 +37,5 @@ app.use('/post', postRouter)
 app.listen(port, function () {
     console.log('Server is Up at port ', port)
 })
+
+module.exports = app

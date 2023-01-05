@@ -35,7 +35,6 @@ function PostsContainer() {
 
     useEffect(() => {
         if (postData) {
-            console.log(postData)
             setUsers(postData.slice(0, pagination))
         }
     }, [page, pagination, postData])

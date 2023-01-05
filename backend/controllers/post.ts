@@ -1,11 +1,11 @@
 const Post = require('../models/post')
+import multer from 'multer'
 import express from 'express'
 const app = express()
 import mongoose from 'mongoose'
 
-async function addPost(req:any, res:any, next:any) {
+async function addPost(req, res, next) {
     const postId = req.body.postId
-    const profileImage = req.body.profileImage
     const postText = req.body.postText
     const userName = req.body.userName
     const postImage = req.body.postImage
@@ -19,7 +19,7 @@ async function addPost(req:any, res:any, next:any) {
   "July", "August", "September", "October", "November", "December"
 ];
 
-function formatAMPM(date:any) {
+function formatAMPM(date) {
     var hours = date.getHours();
     var minutes = date.getMinutes();
     var ampm = hours >= 12 ? 'PM' : 'AM';
@@ -31,7 +31,7 @@ function formatAMPM(date:any) {
   }
     const date = new Date()
     const post = new Post({
-        profileImage,
+        profileImage: '/images/userImg.jpg',
         userName,
         time: formatAMPM(date),
         postType: {
@@ -48,34 +48,34 @@ function formatAMPM(date:any) {
     // const upload = multer({ storage: storage })
     // app.post('/media-upload', upload.single('profile-file'), function (req, res, next) {
     post.save()
-        .then((data:any) => {
+        .then((data) => {
             res.status(201).send(data)
         })
-        .catch((e:any) => {
+        .catch((e) => {
             console.log('req', req.body, e)
 
             res.status(400).send(e)
         })
     // })
 }
-function getPosts(req:any, res:any, next:any) {
+function getPosts(req, res, next) {
     const userName = req.body.userName
     if (!userName) res.status(400).send('Username is required for fetching posts')
     Post.find({ userName })
-        .then((data:any) => {
+        .then((data) => {
             res.status(201).send(data)
         })
-        .catch((e:any) => {
+        .catch((e) => {
             res.status(400).send('User does not exists')
         })
 }
 
-function getAllPosts(req:any, res:any, next:any) {
+function getAllPosts(req, res, next) {
     Post.find()
-        .then((data:any) => {
+        .then((data) => {
             res.status(201).send(data)
         })
-        .catch((e:any) => {
+        .catch((e) => {
             res.status(400).send('No Posts found!!')
         })
 }
